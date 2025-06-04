@@ -1,0 +1,86 @@
+from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
+
+from app.entidades.sensor import Sensor
+from app.entidades.lectura import Lectura
+from app.entidades.ubicacion import Ubicacion
+from app.entidades.anomalia import Anomalia
+from app.entidades.prediccion_sequia import PrediccionSequia
+
+from app.esquemas.esquema_sensor import (
+    SensorCrear, LecturaCrear,
+    UbicacionCrear, AnomaliaCrear, PrediccionCrear
+)
+
+def crear_sensor(db: Session, sensor: SensorCrear):
+    try:
+        sensor_nuevo = Sensor(**sensor.dict())
+        db.add(sensor_nuevo)
+        db.commit()
+        db.refresh(sensor_nuevo)
+        return sensor_nuevo
+    except SQLAlchemyError:
+        db.rollback()
+        raise
+
+def obtener_sensores(db: Session):
+    return db.query(Sensor).all()
+
+def crear_lectura(db: Session, lectura: LecturaCrear):
+    sensor = db.get(Sensor, lectura.sensor_id)
+    if not sensor:
+        raise ValueError("Sensor no encontrado")
+    try:
+        lectura_nueva = Lectura(**lectura.dict())
+        db.add(lectura_nueva)
+        db.commit()
+        db.refresh(lectura_nueva)
+        return lectura_nueva
+    except SQLAlchemyError:
+        db.rollback()
+        raise
+
+def obtener_lecturas_por_sensor(db: Session, sensor_id: int):
+    return db.query(Lectura).filter(Lectura.sensor_id == sensor_id).all()
+
+def crear_ubicacion(db: Session, ubicacion: UbicacionCrear):
+    try:
+        nueva = Ubicacion(**ubicacion.dict())
+        db.add(nueva)
+        db.commit()
+        db.refresh(nueva)
+        return nueva
+    except SQLAlchemyError:
+        db.rollback()
+        raise
+
+def obtener_ubicaciones(db: Session):
+    return db.query(Ubicacion).all()
+
+def crear_anomalia(db: Session, anomalia: AnomaliaCrear):
+    try:
+        nueva = Anomalia(**anomalia.dict())
+        db.add(nueva)
+        db.commit()
+        db.refresh(nueva)
+        return nueva
+    except SQLAlchemyError:
+        db.rollback()
+        raise
+
+def obtener_anomalias_por_lectura(db: Session, lectura_id: int):
+    return db.query(Anomalia).filter(Anomalia.lectura_id == lectura_id).all()
+
+def crear_prediccion(db: Session, prediccion: PrediccionCrear):
+    try:
+        nueva = PrediccionSequia(**prediccion.dict())
+        db.add(nueva)
+        db.commit()
+        db.refresh(nueva)
+        return nueva
+    except SQLAlchemyError:
+        db.rollback()
+        raise
+
+def obtener_predicciones(db: Session):
+    return db.query(PrediccionSequia).all()

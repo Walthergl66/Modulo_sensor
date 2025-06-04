@@ -1,0 +1,22 @@
+from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
+
+from app.entidades.prediccion_sequia import PrediccionSequia
+from app.esquemas.esquema_sensor import PrediccionCrear
+
+def crear_prediccion(db: Session, prediccion: PrediccionCrear):
+    try:
+        nueva = PrediccionSequia(**prediccion.dict())
+        db.add(nueva)
+        db.commit()
+        db.refresh(nueva)
+        return nueva
+    except SQLAlchemyError:
+        db.rollback()
+        raise
+
+def obtener_predicciones(db: Session):
+    return db.query(PrediccionSequia).all()
+
+def obtener_prediccion_por_id(db: Session, prediccion_id: int):
+    return db.query(PrediccionSequia).filter(PrediccionSequia.id == prediccion_id).first()
