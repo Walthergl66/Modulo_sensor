@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.entidades.anomalia import Anomalia
+from dominio.anomalia import Anomalia
 from app.esquemas.esquema_sensor import AnomaliaCrear
 
 def crear_anomalia(db: Session, anomalia: AnomaliaCrear):

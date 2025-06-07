@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.entidades.prediccion_sequia import PrediccionSequia
+from dominio.prediccion_sequia import PrediccionSequia
 from app.esquemas.esquema_sensor import PrediccionCrear
 
 def crear_prediccion(db: Session, prediccion: PrediccionCrear):

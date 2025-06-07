@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.entidades.sensor import Sensor
-from app.entidades.lectura import Lectura
-from app.entidades.ubicacion import Ubicacion
-from app.entidades.anomalia import Anomalia
-from app.entidades.prediccion_sequia import PrediccionSequia
+from dominio.sensor import Sensor
+from dominio.lectura import Lectura
+from dominio.ubicacion import Ubicacion
+from dominio.anomalia import Anomalia
+from dominio.prediccion_sequia import PrediccionSequia
 
 from app.esquemas.esquema_sensor import (
     SensorCrear, LecturaCrear,

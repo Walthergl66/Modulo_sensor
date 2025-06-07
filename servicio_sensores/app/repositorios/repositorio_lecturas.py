@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.entidades.lectura import Lectura
-from app.entidades.sensor import Sensor
+from dominio.lectura import Lectura
+from dominio.sensor import Sensor
 from app.esquemas.esquema_sensor import LecturaCrear
 
 def crear_lectura(db: Session, lectura: LecturaCrear):
