@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.entidades.ubicacion import Ubicacion
-from app.esquemas.esquema_sensor import UbicacionCrear
+from dominio.ubicacion import Ubicacion
+from app.esquemas.esquema_ubicacion import UbicacionCrear
 
 def crear_ubicacion(db: Session, ubicacion: UbicacionCrear):
     try:

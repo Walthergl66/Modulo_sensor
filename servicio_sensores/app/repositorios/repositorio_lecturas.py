@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from dominio.lectura import Lectura
 from dominio.sensor import Sensor
-from app.esquemas.esquema_sensor import LecturaCrear
+from app.esquemas.esquema_lectura import LecturaCrear
 
 def crear_lectura(db: Session, lectura: LecturaCrear):
     sensor = db.query(Sensor).get(lectura.sensor_id)

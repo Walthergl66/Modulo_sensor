@@ -8,9 +8,12 @@ from dominio.anomalia import Anomalia
 from dominio.prediccion_sequia import PrediccionSequia
 
 from app.esquemas.esquema_sensor import (
-    SensorCrear, LecturaCrear,
-    UbicacionCrear, AnomaliaCrear, PrediccionCrear
-)
+    SensorCrear) 
+from app.esquemas.esquema_lectura import (LecturaCrear) 
+from app.esquemas.esquema_ubicacion import (UbicacionCrear) 
+from app.esquemas.esquema_anomalia import (AnomaliaCrear)
+from app.esquemas.esquema_prediccion import (PrediccionCrear)
+
 
 def crear_sensor(db: Session, sensor: SensorCrear):
     try:

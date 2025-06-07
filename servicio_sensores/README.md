@@ -1,24 +1,34 @@
-# Servicio de Sensores Agrotech
+# 🌱 Servicio de Sensores - Agrotech
 
-Este proyecto es un microservicio desarrollado con **FastAPI** que gestiona sensores y sus datos como parte del sistema Agrotech.
+Este microservicio desarrollado con **FastAPI** forma parte del sistema Agrotech. Su función principal es gestionar sensores agrícolas y registrar sus lecturas (como temperatura y humedad), facilitando el monitoreo eficiente de cultivos.
 
 ---
 
-## 🚀 Requisitos
+## 📦 Tecnologías utilizadas
+
+- 🐍 **Python 3.11+**
+- ⚡ **FastAPI**
+- 🐘 **PostgreSQL**
+- 🔁 **Uvicorn** (para el servidor ASGI)
+- 🧪 **SQLAlchemy** (ORM)
+
+---
+
+## ✅ Requisitos previos
 
 - Python 3.11 o superior
-- PostgreSQL (en ejecución)
-- Git (opcional)
+- PostgreSQL instalado y corriendo
+- Git (opcional, para clonar el repositorio)
 
 ---
 
-## ⚙️ Instalación y Ejecución
+## ⚙️ Instalación y ejecución
 
-### 1. Clonar el repositorio (opcional)
+### 1. Clonar el repositorio
 
 ```bash
-git clone https://tu-repositorio-url.git
-cd nombre-del-repositorio
+git clone https://github.com/EmilioSle/Modulo_sensor.git
+cd Modulo_sensor
 ```
 
 ### 2. Crear y activar entorno virtual
@@ -27,7 +37,7 @@ cd nombre-del-repositorio
 
 ```powershell
 python -m venv venv
-.\venv\Scripts\Activate.ps1
+.env\Scripts\Activate.ps1
 ```
 
 **Linux/macOS (bash):**
@@ -43,26 +53,38 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Configurar conexión a PostgreSQL
+---
 
-Edita el archivo `app/base_datos/conexion.py` y asegúrate de que la variable `SQLALCHEMY_DATABASE_URL` tenga los valores correctos:
+## 🛠️ Configuración de la base de datos
+
+Abre el archivo `app/base_datos/conexion.py` y modifica la URL de conexión con tus credenciales:
 
 ```python
 SQLALCHEMY_DATABASE_URL = "postgresql://usuario:contraseña@localhost:5433/agrotech_db"
+```
 
-ejemplo:
+📌 **Ejemplo funcional:**
+
+```python
 SQLALCHEMY_DATABASE_URL = "postgresql://postgres:hola12345@localhost:5433/agrotech_db"
 ```
 
-Asegúrate de que la base de datos `agrotech_db` exista y que PostgreSQL esté corriendo.
+🔔 Asegúrate de que:
 
-### 5. Ejecutar la aplicación
+- La base de datos `agrotech_db` existe.
+- PostgreSQL esté ejecutándose en el puerto `5433`. sino cambia el puertos
+
+---
+
+## 🚀 Ejecución del servidor
+
+Levanta el microservicio localmente con:
 
 ```bash
 uvicorn app.principal:app --reload
 ```
 
-Esto levantará el servidor en:
+El servidor estará disponible en:
 
 ```
 http://127.0.0.1:8000
@@ -70,34 +92,41 @@ http://127.0.0.1:8000
 
 ---
 
-## 🧪 Probar los Endpoints
+## 🔍 Exploración de Endpoints
 
-Abre tu navegador en:
+Puedes probar todos los endpoints desde la interfaz Swagger:
 
-```
-http://127.0.0.1:8000/docs
-```
+👉 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
-Allí encontrarás la interfaz Swagger para probar los endpoints.
+También está disponible la documentación ReDoc:
+
+👉 [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
 ---
 
-## 📄 Notas
+## 📝 Notas importantes
 
-- El sistema crea automáticamente las tablas en la base de datos al arrancar si no existen.
-- Si haces cambios en los modelos, reinicia la app para aplicar los cambios.
-- Asegúrate de que el puerto `5433` de PostgreSQL esté disponible en la otra máquina.
+- Las tablas se crean automáticamente si no existen.
+- Si modificas los modelos, reinicia el servidor.
+- Verifica que el puerto de PostgreSQL no esté bloqueado por firewall o antivirus.
+- El servicio es modular y fácilmente escalable.
 
 ---
 
 ## ✅ Recomendaciones
 
-- Usar un entorno virtual para evitar conflictos de dependencias.
-- Añadir variables de entorno para mayor seguridad (usuario/contraseña de DB).
-- Proteger los endpoints sensibles en producción.
+- Utiliza un entorno virtual para evitar conflictos de dependencias.
+- Maneja tus credenciales de manera segura mediante variables de entorno o un archivo `.env`.
+- Protege los endpoints sensibles antes de desplegar en producción.
+- Realiza pruebas unitarias y de integración para mantener la calidad del servicio.
 
 ---
 
 ## 📬 Contacto
 
-Para dudas o mejoras, puedes escribir a emiliosleimen555@gmail.com
+Para consultas, sugerencias o colaboración, puedes contactarme a:
+
+📧 **emiliosleimen555@gmail.com**
+ **0962720681**
+
+---

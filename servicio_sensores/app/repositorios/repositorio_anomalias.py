@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
 from dominio.anomalia import Anomalia
-from app.esquemas.esquema_sensor import AnomaliaCrear
+from app.esquemas.esquema_anomalia import AnomaliaCrear
 
 def crear_anomalia(db: Session, anomalia: AnomaliaCrear):
     try:
