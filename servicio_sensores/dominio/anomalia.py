@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, UTC
 from app.base_datos.conexion import Base  # Asumo que tienes un Base declarativo
 
 class Anomalia(Base):
@@ -9,8 +9,7 @@ class Anomalia(Base):
     id = Column(Integer, primary_key=True, index=True)
     lectura_id = Column(Integer, ForeignKey("lecturas.id"), nullable=False)
     tipo = Column(String, nullable=False)        # Ejemplo: "temperatura_alta", "humedad_baja"
-    descripcion = Column(String, nullable=True)
-    valor_detectado = Column(Float, nullable=True)
-    fecha_detectada = Column(DateTime, default=datetime.utcnow)
+    valor = Column(Float, nullable=False)        # Ahora se llama 'valor'
+    fecha = Column(DateTime(timezone=True), default=lambda: datetime.now(UTC))  # Ahora se llama 'fecha'
     
     lectura = relationship("Lectura", back_populates="anomalias")

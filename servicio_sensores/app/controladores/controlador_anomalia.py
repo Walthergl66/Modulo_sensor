@@ -13,7 +13,7 @@ def obtener_db():
     finally:
         db.close()
 
-@router.post("/anomalias", response_model=AnomaliaRespuesta)
+@router.post("/", response_model=AnomaliaRespuesta)
 def crear_anomalia(anomalia: AnomaliaCrear, db: Session = Depends(obtener_db)):
     return repositorio_sensores.crear_anomalia(db, anomalia)
 

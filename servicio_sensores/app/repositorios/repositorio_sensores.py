@@ -17,7 +17,7 @@ from app.esquemas.esquema_prediccion import (PrediccionCrear)
 
 def crear_sensor(db: Session, sensor: SensorCrear):
     try:
-        sensor_nuevo = Sensor(**sensor.dict())
+        sensor_nuevo = Sensor(**sensor.model_dump())
         db.add(sensor_nuevo)
         db.commit()
         db.refresh(sensor_nuevo)
@@ -34,7 +34,7 @@ def crear_lectura(db: Session, lectura: LecturaCrear):
     if not sensor:
         raise ValueError("Sensor no encontrado")
     try:
-        lectura_nueva = Lectura(**lectura.dict())
+        lectura_nueva = Lectura(**lectura.model_dump())
         db.add(lectura_nueva)
         db.commit()
         db.refresh(lectura_nueva)
@@ -48,7 +48,7 @@ def obtener_lecturas_por_sensor(db: Session, sensor_id: int):
 
 def crear_ubicacion(db: Session, ubicacion: UbicacionCrear):
     try:
-        nueva = Ubicacion(**ubicacion.dict())
+        nueva = Ubicacion(**ubicacion.model_dump())
         db.add(nueva)
         db.commit()
         db.refresh(nueva)
@@ -62,7 +62,7 @@ def obtener_ubicaciones(db: Session):
 
 def crear_anomalia(db: Session, anomalia: AnomaliaCrear):
     try:
-        nueva = Anomalia(**anomalia.dict())
+        nueva = Anomalia(**anomalia.model_dump())
         db.add(nueva)
         db.commit()
         db.refresh(nueva)
@@ -76,7 +76,7 @@ def obtener_anomalias_por_lectura(db: Session, lectura_id: int):
 
 def crear_prediccion(db: Session, prediccion: PrediccionCrear):
     try:
-        nueva = PrediccionSequia(**prediccion.dict())
+        nueva = PrediccionSequia(**prediccion.model_dump())
         db.add(nueva)
         db.commit()
         db.refresh(nueva)

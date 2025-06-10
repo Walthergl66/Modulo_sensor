@@ -13,10 +13,10 @@ def obtener_db():
     finally:
         db.close()
 
-@router.post("/predicciones", response_model=PrediccionRespuesta)
+@router.post("/", response_model=PrediccionRespuesta)
 def crear_prediccion(prediccion: PrediccionCrear, db: Session = Depends(obtener_db)):
     return repositorio_sensores.crear_prediccion(db, prediccion)
 
-@router.get("/predicciones", response_model=list[PrediccionRespuesta])
+@router.get("/", response_model=list[PrediccionRespuesta])
 def listar_predicciones(db: Session = Depends(obtener_db)):
     return repositorio_sensores.obtener_predicciones(db)

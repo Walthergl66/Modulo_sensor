@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 
 class AnomaliaBase(BaseModel):
@@ -10,7 +10,7 @@ class AnomaliaCrear(AnomaliaBase):
 
 class AnomaliaRespuesta(AnomaliaBase):
     id: int
+    lectura_id: int
     fecha: datetime
-
-    class Config:
-        orm_mode = True
+    
+    model_config = ConfigDict(from_attributes=True)

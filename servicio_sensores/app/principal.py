@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
+
 from app.controladores.controlador_sensores import router as router_sensores
 from app.controladores.controlador_lecturas import router as router_lecturas
 from app.controladores.controlador_ubicaciones import router as router_ubicaciones
@@ -8,12 +10,14 @@ from app.controladores.controlador_predicciones import router as router_predicci
 from app.base_datos.conexion import Base, engine
 from dominio import sensor, lectura, ubicacion, anomalia, prediccion_sequia  # importa todas las entidades
 
-app = FastAPI(title="Servicio de Sensores Agrotech")
-
-# Crear tablas al arrancar la app (solo una vez)
-@app.on_event("startup")
-def startup():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Código que antes estaba en @app.on_event("startup")
     Base.metadata.create_all(bind=engine)
+    yield
+    # Aquí puedes poner código de limpieza si lo necesitas
+
+app = FastAPI(title="Servicio de Sensores Agrotech", lifespan=lifespan)
 
 # Registrar rutas con prefijos y tags únicos para cada recurso
 app.include_router(router_sensores, prefix="/sensores", tags=["Sensores"])

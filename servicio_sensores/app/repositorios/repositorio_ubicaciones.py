@@ -6,7 +6,7 @@ from app.esquemas.esquema_ubicacion import UbicacionCrear
 
 def crear_ubicacion(db: Session, ubicacion: UbicacionCrear):
     try:
-        nueva = Ubicacion(**ubicacion.dict())
+        nueva = Ubicacion(**ubicacion.model_dump())
         db.add(nueva)
         db.commit()
         db.refresh(nueva)

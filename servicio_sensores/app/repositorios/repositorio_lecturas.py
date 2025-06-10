@@ -6,11 +6,12 @@ from dominio.sensor import Sensor
 from app.esquemas.esquema_lectura import LecturaCrear
 
 def crear_lectura(db: Session, lectura: LecturaCrear):
-    sensor = db.query(Sensor).get(lectura.sensor_id)
+    #sensor = db.query(Sensor).get(lectura.sensor_id)
+    sensor = db.get(Sensor, lectura.sensor_id)
     if not sensor:
         raise ValueError("Sensor no encontrado")
     try:
-        lectura_nueva = Lectura(**lectura.dict())
+        lectura_nueva = Lectura(**lectura.model_dump())
         db.add(lectura_nueva)
         db.commit()
         db.refresh(lectura_nueva)

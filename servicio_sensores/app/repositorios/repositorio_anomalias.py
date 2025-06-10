@@ -6,7 +6,7 @@ from app.esquemas.esquema_anomalia import AnomaliaCrear
 
 def crear_anomalia(db: Session, anomalia: AnomaliaCrear):
     try:
-        nueva = Anomalia(**anomalia.dict())
+        nueva = Anomalia(**anomalia.model_dump())
         db.add(nueva)
         db.commit()
         db.refresh(nueva)

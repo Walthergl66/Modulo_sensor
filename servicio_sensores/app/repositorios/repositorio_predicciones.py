@@ -6,7 +6,7 @@ from app.esquemas.esquema_prediccion import PrediccionCrear
 
 def crear_prediccion(db: Session, prediccion: PrediccionCrear):
     try:
-        nueva = PrediccionSequia(**prediccion.dict())
+        nueva = PrediccionSequia(**prediccion.model_dump())
         db.add(nueva)
         db.commit()
         db.refresh(nueva)
@@ -20,3 +20,7 @@ def obtener_predicciones(db: Session):
 
 def obtener_prediccion_por_id(db: Session, prediccion_id: int):
     return db.query(PrediccionSequia).filter(PrediccionSequia.id == prediccion_id).first()
+
+def obtener_predicciones_por_ubicacion(db: Session, ubicacion_id: int):
+    return db.query(PrediccionSequia).filter(PrediccionSequia.ubicacion_id == ubicacion_id).all()
+
