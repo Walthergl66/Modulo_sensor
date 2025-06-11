@@ -17,3 +17,6 @@ def test_obtener_sensores(db_session: Session, sensor_ejemplo):
     crear_sensor(db_session, sensor_ejemplo)
     sensores = obtener_sensores(db_session)
     assert len(sensores) > 0
+
+#$env:PYTHONPATH = "$PWD\servicio_sensores"
+#>> pytest servicio_sensores/pruebas/prueba_repositorio/prueba_repositorio_sensores.py
