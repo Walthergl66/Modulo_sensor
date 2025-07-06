@@ -36,7 +36,7 @@ pip install -r requirements.txt
 🛠️ Configuración de la base de datos
 Crea el archivo .env en la raíz del proyecto:
 
-DATABASE_URL=postgresql://postgres:hola12345@localhost:5433/servicio_sensores
+DATABASE_URL=
 Asegúrate de que la base de datos agrotech_db existe y PostgreSQL corre en el puerto correcto.
 
 🚀 Ejecutar el servidor
